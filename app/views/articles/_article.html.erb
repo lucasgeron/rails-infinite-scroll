@@ -1,0 +1,17 @@
+
+<div id="<%= dom_id article %>">
+  <%= link_to article do %>
+    <div class="bg-cover bg-center <%= action_name == "show" ? 'h-96' : 'h-52'%> rounded-lg relative" style="background-image: url(<%= url_for(article.cover_url) %>)">
+      <p class="text-xl text-white font-bold absolute bottom-0 rounded-b-lg w-full p-2 h-10 bg-gray-800/60">
+        <%= article.id %> <%= article.title %>
+      </p>
+    </div>
+  <%end%>
+
+  <% if action_name == "show" %>
+    <p class="my-5">
+      <%= article.body %>
+    </p>
+  <% end %>
+
+</div>
