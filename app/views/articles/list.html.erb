@@ -1,0 +1,9 @@
+<%= turbo_frame_tag "articles_list_page_#{@page}" do %>
+  <%= render @articles %>
+
+  <%= turbo_stream.replace "articles_list_page_#{@pagy.next}" do %>
+    <%= turbo_frame_tag "articles_list_page_#{@pagy.next}", src: list_articles_url(page: @pagy.next), loading: :lazy, target:'_top', class:"min-w-full grid grid-cols-1 md:grid-cols-3 gap-2 my-2"%>
+    <%= turbo_frame_tag "articles_list_page_#{@pagy.next+1}" if @pagy.next < @pagy.last%>
+  <% end if @pagy.next.present? %>
+
+<% end %>
