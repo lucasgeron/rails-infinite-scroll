@@ -8,13 +8,11 @@
     <%= link_to 'New article', new_article_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
-  <%= turbo_frame_tag "articles_list_1", target:'_top', src: articles_articles_url(page:1), loading: :lazy, class:"min-w-full grid grid-cols-1 md:grid-cols-3 gap-2 my-2" do %>
+  <%= turbo_frame_tag "articles_list_page_1", src: list_articles_url(page: @page), loading: :lazy, target:'_top', class:"min-w-full grid grid-cols-1 md:grid-cols-3 gap-2 my-2" do %>
     <% 3.times do  %>
       <%= render partial: 'article_placeholder' %>
     <% end %>
   <%end%>
+  <%= turbo_frame_tag "articles_list_page_#{@pagy.next}" if @pagy.next.present?%>
 
-  <%= turbo_frame_tag "articles_list_#{@pagy.next}" if @pagy.next.present?%>
-
-  <%= turbo_frame_tag "articles_pagination" %>
 </div>

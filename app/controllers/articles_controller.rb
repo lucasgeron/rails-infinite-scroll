@@ -5,17 +5,13 @@ class ArticlesController < ApplicationController
   def index
     # @articles = Article.all
     @pagy, @articles = pagy(Article.all, items: 3)
-
     # sleep 1
-    respond_to do |format|
-      format.html 
-      format.turbo_stream
-    end
   end
-
-  def articles
+  
+  def list
     @page = params[:page] ? params[:page].to_i : 1
     @pagy, @articles = pagy(Article.all, items: 3, page: @page)
+    # sleep 1
   end
 
   # GET /articles/1 or /articles/1.json
